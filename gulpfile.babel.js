@@ -14,18 +14,19 @@ import minifyCss from 'gulp-minify-css'
 const baseDir = './'
 const srcDir = `${baseDir}src`
 const distDir = `${baseDir}/dist`
+const modules = 'ignore'
 
 // initialize browserSync
 browserSync.create()
 
 
 gulp.task('build:js', () => {
-    return gulp.src(`${ srcDir }/**/*.js`)
-        .pipe(sourcemaps.init())
-        .pipe(babel())
-        .pipe(concat('all.js'))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(distDir))
+   return gulp.src(`${ srcDir }/**/*.js`)
+     .pipe(sourcemaps.init())
+     .pipe(babel({modules}))
+     .pipe(concat('all.js'))
+     .pipe(sourcemaps.write('.'))
+     .pipe(gulp.dest(distDir))
 })
 
 gulp.task('build:sass', () => {

@@ -1,1 +1,20 @@
+
+/* Resets */
 @import '../node_modules/node-normalize-scss/_normalize.scss';
+
+p {
+  color: green;
+}
+
+.delay {
+  animation: ColorToRed 0.4s forwards ease;
+}
+
+@keyframes ColorToRed {
+  0% {
+    color: inherit;
+  }
+  100% {
+    color: red;
+  }
+}
