@@ -354,20 +354,34 @@ th {
   padding: 0; }
 
 p {
-  color: green; }
+  -webkit-animation: onTime 0.4s forwards ease;
+  animation: onTime 0.4s forwards ease; }
 
 .delay {
-  -webkit-animation: ColorToRed 0.4s forwards ease;
-  animation: ColorToRed 0.4s forwards ease; }
+  -webkit-animation: delayed 0.4s forwards ease;
+  animation: delayed 0.4s forwards ease; }
 
-@-webkit-keyframes ColorToRed {
+/* Animations */
+@-webkit-keyframes delayed {
   0% {
     color: inherit; }
   100% {
     color: red; } }
 
-@keyframes ColorToRed {
+@keyframes delayed {
   0% {
     color: inherit; }
   100% {
     color: red; } }
+
+@-webkit-keyframes onTime {
+  0% {
+    color: inherit; }
+  100% {
+    color: green; } }
+
+@keyframes onTime {
+  0% {
+    color: inherit; }
+  100% {
+    color: green; } }

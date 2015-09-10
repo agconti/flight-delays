@@ -5,7 +5,10 @@ var airportCodes = ['ATL', 'BNA', 'BOS', 'BWI', 'CLE', 'CLT', 'CVG', 'DCA', 'DEN
 
 var main = document.getElementsByTagName('main')[0],
     airportCodesStream = Rx.Observable.fromArray(airportCodes),
-    requestUrlStream = airportCodesStream.map(function (code) {
+    intervalStream = Rx.Observable.interval(1000).flatMap(function (interval) {
+  return airportCodesStream;
+}),
+    requestUrlStream = intervalStream.map(function (code) {
   return 'http://services.faa.gov/airport/status/' + code + '?format=json';
 }),
     responseStream = requestUrlStream.flatMap(function (url) {
@@ -21,5 +24,7 @@ responseStream.subscribe(function (airport) {
   }
   p.innerHTML += airport.IATA + ' | Delay: ' + delay + ' reason: ' + airport.status.reason;
   main.appendChild(p);
+}, function (err) {
+  return console.error(err);
 });
 //# sourceMappingURL=all.js.map
