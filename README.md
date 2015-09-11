@@ -11,7 +11,7 @@ Real time flight delays in the US with Rx.js
 Install dependencies:
 
 ```bash
-npm Install
+npm install
 ```
 
 Start development server:
