@@ -10,14 +10,13 @@ let main = document.getElementsByTagName('main')[0]
 
 responseStream
   .subscribe((airport) => {
-    let delay = airport.delay
-      , p = document.createElement('p')
+    airport.delay = JSON.parse(airport.delay)
 
-    if (delay === 'true'){
-      p.classList.add('delay')
-    }
-    p.innerHTML += `${airport.IATA} | Delay: ${delay} reason: ${airport.status.reason}`
-    main.appendChild(p)
+    let source = document.getElementById("airport-template").innerHTML
+      , template = Handlebars.compile(source)
+      , airportTemplate = template(airport)
+
+    main.innerHTML += airportTemplate
     }
   , err => console.error(err)
   )

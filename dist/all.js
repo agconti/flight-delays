@@ -15,16 +15,19 @@ var main = document.getElementsByTagName('main')[0],
   return Rx.Observable.fromPromise(jQuery.getJSON(url));
 });
 
+var airportthang = undefined;
 responseStream.subscribe(function (airport) {
-  var delay = airport.delay,
-      p = document.createElement('p');
+  airport.delay = JSON.parse(airport.delay);
 
-  if (delay === 'true') {
-    p.classList.add('delay');
-  }
-  p.innerHTML += airport.IATA + ' | Delay: ' + delay + ' reason: ' + airport.status.reason;
-  main.appendChild(p);
+  var delay = airport.delay,
+      source = document.getElementById("airport-template").innerHTML,
+      template = Handlebars.compile(source),
+      airportTemplate = template(airport);
+
+  main.innerHTML += airportTemplate;
 }, function (err) {
   return console.error(err);
 });
+
+responseStream.dispose();
 //# sourceMappingURL=all.js.map
