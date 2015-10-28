@@ -1,26 +1,31 @@
-class Airport {
+export class Airport {
 
-  constructor(airport, parent){
-    this.name = airport.name
+  constructor(airport, el){
+    this.el = el
+    this.children = this.el.children
+    this.IATA = airport.IATA
     this.delay = airport.delay
-    this.reason = airport.reason
-    this.parent = parent
-    this.children = parent.children
+    this.reason = airport.status.reason
   }
 
-  set reason (reason) {
-    if (this.reason !== reason) {
-      let reasonElement = this.children.filter(el => el.className = 'reason')[0]
-      this.reason = reason
-      reasonElement.innerHTML = reason
+   update(property, value) {
+
+    if (this[property] !== value) {
+
+      let el
+        , prop
+        , child
+      for (prop in this.children){
+        let child = this.children[prop]
+
+        if (child.className == property){
+          el = child
+        }
+      }
+
+      el.innerHTML = value
+      this[property] = value
     }
-  }
-  
-  set delay (delay) {
-    if (this.delay !== delay) {
-      let delayElement = this.children.filter(el => el.className = 'delay')[0]
-      this.delay = delay
-      delayElement.innerHTML = delay
-    }
+
   }
 }

@@ -16,18 +16,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
         <script>window.Rx || document.write('<script src="node_modules/rx/dist/rx.all.js"><\/script>')</script>
         <script>window.jQuery || document.write('<script src="node_modules/jquery/dist/jquery.min.js"><\/script>')</script>
-        <script>window.Handlebars || document.write('<script src="node_modules/handlebars/dist/handlebars.js')</script>
+        <script>window.Handlebars || document.write('<script src="node_modules/handlebars/dist/handlebars.js"><\/script>')</script>
         <script src="dist/all.js"></script>
     </body>
     <script id="airport-template" type="text/x-handlebars-template">
-      <article class="airpot">
+      <article class="airport">
         <header>
-          <h1>{{IATA}}</h1>
+          <h1 class="name">{{IATA}}</h1>
         </header>
-        {{#if delay}}
         <p class="delay">{{delay}}</p>
-        {{/if}}
-        <p>{{status.reason}}</p>
+        <p class='reason'>{{status.reason}}</p>
       </article>
     </script>
 </html>
