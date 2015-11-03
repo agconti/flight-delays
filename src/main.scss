@@ -2,8 +2,19 @@
 /* Resets */
 @import '../node_modules/node-normalize-scss/_normalize.scss';
 
+.view {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+}
 
-p {
+.airport {
+  flex: 1 0 auto;
+}
+.ontime {
   animation: onTime 0.4s forwards ease;
 }
 

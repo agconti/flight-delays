@@ -18,17 +18,18 @@ var Airport = (function () {
   _createClass(Airport, [{
     key: "update",
     value: function update(property, value) {
+      var el = undefined;
 
       if (this[property] !== value) {
 
-        var el = undefined,
-            prop = undefined,
-            child = undefined;
-        for (prop in this.children) {
-          var _child = this.children[prop];
+        var i = 0,
+            childrenLength = this.children.length;
+        for (; i < this.children.length; i++) {
+          var child = this.children[i];
 
-          if (_child.className == property) {
-            el = _child;
+          if (child.classList.contains(property)) {
+            el = child;
+            break;
           }
         }
 
@@ -50,12 +51,12 @@ var main = document.getElementsByTagName('main')[0],
     requestUrlStream = airportCodesStream.map(function (code) {
   return 'http://services.faa.gov/airport/status/' + code + '?format=json';
 }),
-    responseStream = requestUrlStream.flatMap(function (url) {
-  return Rx.Observable.fromPromise(getAirport(url));
+    responseStream = requestUrlStream
+// .flatMap((url) => Rx.Observable.fromPromise(getAirport(url)))
+.flatMap(function (url) {
+  return Rx.Observable.fromPromise(jQuery.getJSON(url));
 }),
-
-// .flatMap((url) => Rx.Observable.fromPromise(jQuery.getJSON(url)))
-intervalResponseStream = Rx.Observable.interval(1000).timeInterval().take(3).flatMap(function (interval) {
+    intervalResponseStream = Rx.Observable.interval(3000).timeInterval().take(3).flatMap(function (interval) {
   return responseStream;
 });
 
@@ -65,20 +66,16 @@ responseStream.subscribe(function (airportData) {
   var source = document.getElementById("airport-template").innerHTML,
       template = Handlebars.compile(source),
       airportTemplate = template(airportData),
-      el = $(airportTemplate)[0];
-
-  main.appendChild(el);
-
-  var airport = new Airport(airportData, el);
+      el = $(airportTemplate)[0],
+      airport = new Airport(airportData, el);
 
   intervalResponseStream.filter(function (airportData) {
-    return airportData.delay !== airport.delay;
+    return airportData.delay !== airport.dealy;
   }).subscribe(function (airportData) {
     airport.update('delay', airportData.delay);
   }, function (err) {
     return console.error(err);
   });
-
   intervalResponseStream.filter(function (airportData) {
     return airportData.status.reason !== airport.reason;
   }).subscribe(function (airportData) {
@@ -86,6 +83,8 @@ responseStream.subscribe(function (airportData) {
   }, function (err) {
     return console.error(err);
   });
+
+  main.appendChild(el);
 }, function (err) {
   return console.error(err);
 });

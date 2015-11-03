@@ -9,17 +9,18 @@ export class Airport {
   }
 
    update(property, value) {
+    let el
 
     if (this[property] !== value) {
 
-      let el
-        , prop
-        , child
-      for (prop in this.children){
-        let child = this.children[prop]
+      let i = 0
+        , childrenLength = this.children.length
+      for (; i < this.children.length; i++) {
+        let child = this.children[i]
 
-        if (child.className == property){
+        if (child.classList.contains(property)){
           el = child
+          break
         }
       }
 

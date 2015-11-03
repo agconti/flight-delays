@@ -7,10 +7,13 @@
         <meta name="description" content="Flight Delays with Rx.js">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
+        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="dist/main.css">
     </head>
     <body>
-        <main></main>
+        <main class="view"></main>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/3.1.2/rx.all.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
@@ -20,12 +23,12 @@
         <script src="dist/all.js"></script>
     </body>
     <script id="airport-template" type="text/x-handlebars-template">
-      <article class="airport">
-        <header>
-          <h1 class="name">{{IATA}}</h1>
+      <article class="airport mdl-card mdl-shadow--2dp">
+        <header class="mdl-card__title mdl-card--expand">
+          <h1 class="name mdl-card__title-text">{{IATA}}</h1>
         </header>
-        <p class="delay">{{delay}}</p>
-        <p class='reason'>{{status.reason}}</p>
+        <p class="delay mdl-card__supporting-text">{{delay}}</p>
+        <p class='reason mdl-card__supporting-text'>{{status.reason}}</p>
       </article>
     </script>
 </html>

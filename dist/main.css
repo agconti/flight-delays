@@ -353,7 +353,28 @@ td,
 th {
   padding: 0; }
 
-p {
+.view {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh; }
+
+.airport {
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto; }
+
+.ontime {
   -webkit-animation: onTime 0.4s forwards ease;
   animation: onTime 0.4s forwards ease; }
 
