@@ -8,7 +8,7 @@ let main = document.getElementsByTagName('main')[0]
       .map(code => `http://services.faa.gov/airport/status/${code}?format=json`)
   , responseStream = requestUrlStream
       .flatMap((url) => Rx.Observable.fromPromise(getAirport(url)))
-  , intervalResponseStream = Rx.Observable.interval(3000).timeInterval().take(3).flatMap(interval => responseStream)
+  , intervalResponseStream = Rx.Observable.interval(3000).timeInterval().flatMap(interval => responseStream)
 
 responseStream
   .subscribe(airportData => {

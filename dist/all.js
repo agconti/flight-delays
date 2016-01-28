@@ -72,7 +72,7 @@ var main = document.getElementsByTagName('main')[0],
     responseStream = requestUrlStream.flatMap(function (url) {
   return Rx.Observable.fromPromise(getAirport(url));
 }),
-    intervalResponseStream = Rx.Observable.interval(3000).timeInterval().take(3).flatMap(function (interval) {
+    intervalResponseStream = Rx.Observable.interval(3000).timeInterval().flatMap(function (interval) {
   return responseStream;
 });
 
