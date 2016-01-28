@@ -48,7 +48,7 @@ var Airport = (function () {
           }
         }
 
-        el.innerHTML = value;
+        el.innerHTML = property.toUpperCase() + ': ' + value;
         this[property] = value;
       }
     }
@@ -89,13 +89,6 @@ responseStream.subscribe(function (airportData) {
     return airportData.delay !== airport.delay;
   }).subscribe(function (airportData) {
     airport.update('delay', airportData.delay);
-  }, function (err) {
-    return console.error(err);
-  });
-
-  var statusUpdateStream = intervalResponseStream.filter(function (airportData) {
-    return airportData.status.reason !== airport.reason;
-  }).subscribe(function (airportData) {
     airport.update('reason', airportData.status.reason);
   }, function (err) {
     return console.error(err);
@@ -112,23 +105,19 @@ var _createClass = (function () { function defineProperties(target, props) { for
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 var MockedAirport = (function () {
-  function MockedAirport(airports, delay, status) {
+  function MockedAirport(airport, delay, status) {
     _classCallCheck(this, MockedAirport);
 
+    this.IATA = airport;
     this.delay = delay;
-    this.status = status || { reason: 'Things are great!' };
-    this.chooseAirport(airports);
+    this.status = status;
   }
 
   _createClass(MockedAirport, [{
-    key: 'chooseAirport',
-    value: function chooseAirport(airports) {
-      this.IATA = this.getRandomItem(airports);
-    }
-  }, {
     key: 'chooseDelay',
     value: function chooseDelay(reasons) {
-      this.status.reason = this.getRandomItem(reasons);
+      var reason = this.getRandomItem(reasons);
+      this.status = { reason: reason };
     }
   }, {
     key: 'getRandomItem',
@@ -140,9 +129,9 @@ var MockedAirport = (function () {
   return MockedAirport;
 })();
 
-function airportFactory() {
+function airportFactory(airportCode) {
   var number = Math.random();
-  var airport = new MockedAirport(airportCodes, false);
+  var airport = new MockedAirport(airportCode, false, { reason: 'Things are great!' });
 
   if (number > 0.5) {
     airport.delay = true;
@@ -154,9 +143,10 @@ function airportFactory() {
 
 function getAirport(url) {
   return new Promise(function (res, rej) {
+    var airportCode = url.split(/[\/|?]+/)[4];
 
     setTimeout(function () {
-      var airport = airportFactory();
+      var airport = airportFactory(airportCode);
       res(airport);
     }, 300);
   });

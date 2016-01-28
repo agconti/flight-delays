@@ -36,7 +36,7 @@ export class Airport {
         }
       }
 
-      el.innerHTML = value
+      el.innerHTML = `${property.toUpperCase()}: ${value}`
       this[property] = value
     }
   }

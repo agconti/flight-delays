@@ -23,12 +23,10 @@ responseStream
 
     let delayUpdateStream = intervalResponseStream
       .filter(airportData => airportData.delay !== airport.delay)
-      .subscribe( airportData => { airport.update('delay', airportData.delay) }
-                , err => console.error(err))
-
-    let statusUpdateStream = intervalResponseStream
-      .filter(airportData => airportData.status.reason !== airport.reason)
-      .subscribe( airportData => { airport.update('reason', airportData.status.reason) }
+      .subscribe( airportData => {
+                    airport.update('delay', airportData.delay)
+                    airport.update('reason', airportData.status.reason)
+                  }
                 , err => console.error(err))
 
     main.appendChild(el)
