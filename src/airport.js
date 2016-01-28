@@ -7,8 +7,15 @@ export class Airport {
     this.delay = airport.delay
     this.reason = airport.status.reason
   }
-
-   update(property, value) {
+  toggleDelay(el, delayed){
+    if (delayed) {
+      el.classList.remove('ontime')
+      return el.classList.add('delayed')
+    }
+    el.classList.remove('delayed')
+    el.classList.add('ontime')
+  }
+  update(property, value) {
     let el
 
     if (this[property] !== value) {
@@ -20,6 +27,11 @@ export class Airport {
 
         if (child.classList.contains(property)){
           el = child
+
+          if (property === 'delay'){
+              this.toggleDelay(el, value)
+          }
+
           break
         }
       }
@@ -27,6 +39,5 @@ export class Airport {
       el.innerHTML = value
       this[property] = value
     }
-
   }
 }

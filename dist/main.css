@@ -378,7 +378,7 @@ th {
   -webkit-animation: onTime 0.4s forwards ease;
   animation: onTime 0.4s forwards ease; }
 
-.delay {
+.delayed {
   -webkit-animation: delayed 0.4s forwards ease;
   animation: delayed 0.4s forwards ease; }
 

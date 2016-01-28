@@ -1,0 +1,10 @@
+export const delayReasons = [ 'Geese! Everywhere. OH MY GOD.'
+                            , 'A nasty blizzard is dumping 10 feet of snow.'
+                            , 'Severe Thunderstorms.'
+                            , 'Tornadoes.'
+                            , 'Sharknadoes.'
+                            , 'Extreme flooding.'
+                            , 'Low visibility.'
+                            , 'Lot\'s of fog.'
+                            , 'Fuel shortage.'
+                            ]

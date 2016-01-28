@@ -18,10 +18,11 @@
   animation: onTime 0.4s forwards ease;
 }
 
-.delay {
+.delayed {
   animation: delayed 0.4s forwards ease;
 }
 
+.delay {}
 
 /* Animations */
 @keyframes delayed {
